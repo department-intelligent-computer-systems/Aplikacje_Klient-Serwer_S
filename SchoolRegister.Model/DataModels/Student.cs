@@ -15,21 +15,15 @@ namespace SchoolRegister.Model.DataModels
 
         public int? ParentId { get; set; }
 
-        public double AverageGrade
-        {
-            get
-            {
-                double sum = 0;
-                foreach(Grade grade in Grades)
-                {
-                    sum += (int)(grade.GradeValue);
-                }
-                return sum / Grades.Count;
-            }
-        }
+        public double AverageGrade => Grades == null || Grades.Count == 0 ? 0.0d: Math.Round(Grades.Average(g => (int)g.GradeValue),1);
+        
 
         public IDictionary<string, double> AverageGradePerSubject
-        {
+        => Grades ==null ? new Dictionary<string, double>():
+        Grades.GroupBy(g => g.Subject.Name).Select(g => new {SubjectName = g.Key, AvgGrade= Math.Round(g.Average(avg =>(int)avg.GradeValue),1)})
+        .ToDictionary(avg => avg.SubjectName,avg=>avg.AvgGrade);
+        /*{
+           
             get
             {
                 var result = new Dictionary<string, double>();
@@ -51,10 +45,15 @@ namespace SchoolRegister.Model.DataModels
 
                 return result;
             }
-        }
+            
 
+        }
+        */
         public IDictionary<string, List<GradeScale>> GradesPerSubject
-        {
+        => Grades==null ? new Dictionary<string, List<GradeScale>>():Grades
+        .GroupBy(g=>g.Subject.Name).Select(g=> new{SubjectName = g.Key, GradeList = g.Select(x=>x.GradeValue).ToList()})
+        .ToDictionary(x=> x.SubjectName,x =>x.GradeList);
+        /*{
             get
             {
                 var result = new Dictionary<string, List<GradeScale>>();
@@ -75,4 +74,6 @@ namespace SchoolRegister.Model.DataModels
 
        // public Student() { }
     }
+    */
+}
 }
