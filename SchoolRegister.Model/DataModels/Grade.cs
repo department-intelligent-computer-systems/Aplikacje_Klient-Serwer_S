@@ -9,9 +9,9 @@ namespace SchoolRegister.Model.DataModels
     {
         public DateTime DateOfIssue { get;set;}
         public GradeScale GradeValue { get; set;}
-        public Subject  Subject { get; set; }
+        public Subject  Subject { get; set; } = default!;
         public int SujectId { get; set; }
         public int StudentId { get; set; }
-        public Student Student { get; set; }
+        public Student Student { get; set; } = default!;
     }
 }
