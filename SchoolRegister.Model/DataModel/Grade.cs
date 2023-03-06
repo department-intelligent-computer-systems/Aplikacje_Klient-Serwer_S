@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolRegister.Model.DataModel
+namespace SchoolRegister.Model.DataModels
 {
     public class Grade
     {
-        public string DateOfIssue { get; set; } = string.Empty;
-        public string GradeValue { get; set; } = string.Empty;
-        public string Subject { get; set; } = string.Empty;
-        public int SubjectId { get; set; }
+        public DateTime DateOfIssue { get;set;}
+        public GradeScale GradeValue { get; set;}
+        public Subject  Subject { get; set; }
+        public int SujectId { get; set; }
         public int StudentId { get; set; }
-        public string StudentId { get; set; } = string.Empty;
+        public Student Student { get; set; }
     }
 }
