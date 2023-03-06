@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.Identity;
-using System;
+using System.Reflection;
+using System.Data.Common;
 namespace SchoolRegister.Model.DataModels
 {
-public class Student : User
-{
-public  Group Group { get; set; } 
-public  int? GroupId { get; set; } 
-public IList<Grade> Grades {get; set;}
-public Parent Parent {get; set;}
-public int? ParentId {get; set;}
-public double AvarageGrade {get;}
-public IDictionary<string,double> AverageGradePerSubject{get;}
-public IDictionary<string,List<GradeScale>> Grad
-public DateTime RegistrationDate { get; set; }
-}
+    public class Student : User
+    {
+        public Group Group {get;set;} = default!;
+        public int? GroupId {get;set;}
+        public IList<Grade> Grades {get;set;} = default!;
+        public Parent Parent {get; set;} = default!;
+        public int?  ParentId  {get; set;}
+       
+
+    }
 }

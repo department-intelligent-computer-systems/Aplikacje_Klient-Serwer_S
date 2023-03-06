@@ -1,10 +1,19 @@
-using Microsoft.AspNetCore.Identity;
+using System.Security.Principal;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 namespace SchoolRegister.Model.DataModels
 {
-public class role : IdentityRole<int>
-{
-public RoleValue RoleValue { get; set; } = default! ;
-public Role { name: string, RoleValue }
-}
+
+    public class Role: IdentityRole<int>
+    {
+        public RoleValue RoleValue { get; set;}
+        public Role (string name , RoleValue roleValue)
+        {
+            name = this.Name;
+            roleValue = this.RoleValue;
+        }
+    }
 }
