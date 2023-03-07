@@ -23,6 +23,8 @@ namespace SchoolRegister.Model.DataModels
 
         public IDictionary<string, List<GradeScale>> GradesPerSubject { get; }
 
+        public int test {get;set;}
+
         public Student()
         { }
     }
