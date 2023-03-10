@@ -16,7 +16,10 @@ namespace SchoolRegister.Model.DataModels
         Grades.GroupBy(g => g.Subject.Name)
         .Select(g => new{SubjectName = g.Key, AvgGrade = Math.Round(g.Average(avg => (int)avg.GradeValue), 1)})
         .ToDictionary(name => name.SubjectName, avg => avg.AvgGrade);
-        public IDictionary<string, List<GradeScale>> GradesPerSubject;
+        public IDictionary<string, List<GradeScale>> GradesPerSubject => Grades == null || Grades.Count == 0 ? new Dictionary<string, List<GradeScale>> :
+        Grades.GroupBy(g => g.Subject.Name)
+        .Select(g => new{SubjectName = g.Key, GradeList = g.Select(x => (int)x.GradeValue).ToList()})
+        .ToDictionary(name => name.SubjectName, list => list.GradeList);
 
     }
 }
