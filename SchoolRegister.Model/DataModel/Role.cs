@@ -9,7 +9,7 @@ namespace SchoolRegister.Model.DataModels
         public Role(){}
         public Role(string name, RoleValue rolevalue) 
         {
-          
+          //
         }
     }
     
