@@ -7,5 +7,6 @@ namespace SchoolRegister.Model.DataModels
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public DateTime RegistrationDate { get; set; }
+    
     }
 }

@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Identity;
 namespace SchoolRegister.Model.DataModels
 {
 
-    public class Role: IdentityRole<int>
+     public class Role: IdentityRole<int>
     {
         public RoleValue RoleValue { get; set;}
-        public Role (string name , RoleValue roleValue)
+        public Role() : base()
         {
-            name = this.Name;
-            roleValue = this.RoleValue;
+            RoleValue = RoleValue.User;
+        }
+        public Role (string name , RoleValue roleValue): base(name)
+        {
+            RoleValue = roleValue;
         }
     }
 }
