@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Linq;
 using System;
 namespace SchoolRegister.Model.DataModels
 {
@@ -9,9 +11,14 @@ namespace SchoolRegister.Model.DataModels
         public IList<Grade> Grades { get; set; }
         public Parent Parent { get; set; }
         public int? ParentId { get; set; }
-        public double AverageGrade;
-        public IDictionary<string, double> AverageGradePerSubject;
-        public IDictionary<string, List<GradeScale>> GradesPerSubject;
-
+        public double AverageGrade => Grades == null || Grades.Count == 0 ? 0.0d : Math.Round(Grades.Average(g => (int)g.GradeValue), 1);
+        public IDictionary<string, double> AverageGradePerSubject => Grades == null || Grades.Count == 0 ? new Dictionary<string, double>() :
+        Grades.GroupBy(g => g.Subject.Name)
+        .Select(g => new{SubjectName = g.Key, AvgGrade = Math.Round(g.Average(avg => (int)avg.GradeValue), 1)})
+        .ToDictionary(name => name.SubjectName, avg => avg.AvgGrade);
+        public IDictionary<string, List<GradeScale>> GradesPerSubject => Grades == null || Grades.Count == 0 ? new Dictionary<string, List<GradeScale>>() : 
+        Grades.GroupBy(g => g.Subject.Name)
+        .Select(g => new{SubjectName = g.Key, GradeList = g.Select(x => x.GradeValue).ToList()})
+        .ToDictionary(name => name.SubjectName, list => list.GradeList);
     }
 }
