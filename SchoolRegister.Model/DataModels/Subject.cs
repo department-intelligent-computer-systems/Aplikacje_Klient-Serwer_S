@@ -7,7 +7,7 @@ namespace SchoolRegister.Model.DataModels
         public string Name { get; set; }=string.Empty;
         public string Description { get; set; }=string.Empty;
         public IList<SubjectGroup> SubjectGroups { get; set; }
-        public Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; } 
         public int TeacherId { get; set; }
         public IList<Grade> Grades { get; set; }
     }
